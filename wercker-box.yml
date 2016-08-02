@@ -1,8 +1,8 @@
-name: example
-version: 0.0.4
+name: hirokisvc
+version: 0.0.4w
 type: main
 platform: ubuntu@12.04
-description: example
+description: phpssh
 keywords:
   - php
   - php7
@@ -10,7 +10,7 @@ packages:
   - php@7
 script: |
   sudo apt-get update
-  sudo apt-get install -y wget curl tar make gcc autoconf re2c bison libxml2-dev python-pip
+  sudo apt-get install -y wget curl tar make gcc autoconf re2c bison libxml2-dev python-pip openssh-server ssh xinit xvnc twm x11apps xterm
   sudo apt-get clean
 
   sudo pip install awscli
@@ -25,6 +25,9 @@ script: |
   make
   sudo make install
   sudo cp php.ini-development /usr/local/lib/php.ini
+  mkuser ubuntu
+  echo 'ubuntu ALL=(ALL) ALL' >> /etc/sudoers
+  echo ubuntu | passwd --stdin ubuntu
 
   cd
   sudo rm -fr /tmp/*
